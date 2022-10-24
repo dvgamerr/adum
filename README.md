@@ -1,8 +1,8 @@
-## duma
+## Adum
 
-[![Build Status](https://travis-ci.org/mattgathu/duma.svg?branch=master)](https://travis-ci.org/mattgathu/duma)
-[![Build status](https://ci.appveyor.com/api/projects/status/007cmm9c6c9onai9?svg=true)](https://ci.appveyor.com/project/mattgathu/duma)
-[![Build status](https://github.com/mattgathu/duma/workflows/CI/badge.svg?branch=master)](https://github.com/mattgathu/duma/actions)
+[![Build Status](https://travis-ci.org/dvgamerr/Adum.svg?branch=master)](https://travis-ci.org/dvgamerr/Adum)
+[![Build status](https://ci.appveyor.com/api/projects/status/007cmm9c6c9onai9?svg=true)](https://ci.appveyor.com/project/dvgamerr/Adum)
+[![Build status](https://github.com/dvgamerr/Adum/workflows/CI/badge.svg?branch=master)](https://github.com/dvgamerr/Adum/actions)
 
 A minimal file downloader written in Rust.
 
@@ -16,12 +16,12 @@ A minimal file downloader written in Rust.
 ## usage
 
 ```
-Duma 0.1.0
-Matt Gathu <mattgathu@gmail.com>
+Adum 0.1.0
+Matt Gathu <dvgamerr@gmail.com>
 A minimal file downloader
 
 USAGE:
-    duma [FLAGS] [OPTIONS] <URL>
+    Adum [FLAGS] [OPTIONS] <URL>
 
 FLAGS:
     -c, --continue        resume getting a partially-downloaded file
@@ -32,7 +32,7 @@ FLAGS:
     -V, --version         Prints version information
 
 OPTIONS:
-    -U, --useragent <AGENT>                    identify as AGENT instead of Duma/VERSION
+    -U, --useragent <AGENT>                    identify as AGENT instead of Adum/VERSION
     -O, --output <FILE>                        write documents to FILE
     -n, --num_connections <NUM_CONNECTIONS>    maximum number of concurrent connections (default is 8)
     -T, --timeout <SECONDS>                    set all timeout values to SECONDS
@@ -47,7 +47,7 @@ ARGS:
 Via cargo
 
 ```
-cargo install duma
+cargo install Adum
 ```
 
 ## screenshot

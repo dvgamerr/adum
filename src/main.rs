@@ -1,8 +1,8 @@
 use std::process;
 
 use clap::{clap_app, crate_version};
-use duma::download::{ftp_download, http_download};
-use duma::utils;
+use adum::download::{ftp_download, http_download};
+use adum::utils;
 use failure::{format_err, Fallible};
 
 fn main() {
@@ -16,7 +16,7 @@ fn main() {
 }
 
 fn run() -> Fallible<()> {
-    let args = clap_app!(Duma =>
+    let args = clap_app!(Adum =>
     (version: crate_version!())
     (author: "Matt Gathu <mattgathu@gmail.com>")
     (about: "A minimal file downloader")
@@ -25,7 +25,7 @@ fn run() -> Fallible<()> {
     (@arg singlethread: -s --singlethread "download using only a single thread")
     (@arg headers: -H --headers "prints the headers sent by the HTTP server")
     (@arg FILE: -O --output +takes_value "write documents to FILE")
-    (@arg AGENT: -U --useragent +takes_value "identify as AGENT instead of Duma/VERSION")
+    (@arg AGENT: -U --useragent +takes_value "identify as AGENT instead of aDum/VERSION")
     (@arg SECONDS: -T --timeout +takes_value "set all timeout values to SECONDS")
     (@arg NUM_CONNECTIONS: -n --num_connections +takes_value "maximum number of concurrent connections (default is 8)")
     (@arg URL: +required +takes_value "url to download")

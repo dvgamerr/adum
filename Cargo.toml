@@ -1,11 +1,11 @@
 [package]
-name = "duma"
+name = "adum"
 version = "0.2.0"
 authors = ["Matt Gathu <mattgathu@gmail.com>"]
 description = "A minimal file downloader"
-documentation = "https://github.com/mattgathu/duma"
-homepage = "https://github.com/mattgathu/duma"
-repository = "https://github.com/mattgathu/duma"
+documentation = "https://github.com/dvgamerr/adum"
+homepage = "https://github.com/dvgamerr/adum"
+repository = "https://github.com/dvgamerr/adum"
 readme = "README.md"
 keywords = ["http", "client", "cli", "file", "download"]
 categories = ["web-programming::http-client", "command-line-utilities", "network-programming"]
