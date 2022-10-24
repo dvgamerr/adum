@@ -2,6 +2,8 @@ name: Rust
 on:
   push:
     branches: [ "main" ]
+    tags:
+      - v*
   pull_request:
     branches: [ "main" ]
 
@@ -24,6 +26,9 @@ jobs:
             archive: zip
     steps:
     - uses: actions/checkout@v3
+
+    - name: Cache node_modules 📦
+    - uses: Swatinem/rust-cache@v2
 
     - name: Compile and release
       uses: rust-build/rust-build.action@v1.3.2

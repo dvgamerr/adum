@@ -47,7 +47,7 @@ ARGS:
 Via cargo
 
 ```
-cargo install Adum
+cargo install adum
 ```
 
 ## screenshot
