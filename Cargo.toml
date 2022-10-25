@@ -15,7 +15,7 @@ edition = "2018"
 [dependencies]
 indicatif = "0.15.0"
 console = "0.15.2"
-clap = "2.33.2"
+clap = "4.0.18"
 ftp = "3.0.1"
 threadpool = "1.8.1"
 failure = { version = "0.1.8", features = [] }
