@@ -13,7 +13,7 @@ license = "MIT"
 edition = "2018"
 
 [dependencies]
-indicatif = "0.15.0"
+indicatif = "0.17.1"
 console = "0.15.2"
 clap = "2.33.2"
 ftp = "3.0.1"
