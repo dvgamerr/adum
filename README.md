@@ -1,8 +1,6 @@
 ## Adum
 
-[![Build Status](https://travis-ci.org/dvgamerr/Adum.svg?branch=master)](https://travis-ci.org/dvgamerr/Adum)
-[![Build status](https://ci.appveyor.com/api/projects/status/007cmm9c6c9onai9?svg=true)](https://ci.appveyor.com/project/dvgamerr/Adum)
-[![Build status](https://github.com/dvgamerr/Adum/workflows/CI/badge.svg?branch=master)](https://github.com/dvgamerr/Adum/actions)
+[![Rust](https://github.com/dvgamerr/adum/actions/workflows/rust-builds.yml/badge.svg?branch=main)](https://github.com/dvgamerr/adum/actions/workflows/rust-builds.yml)
 
 A minimal file downloader written in Rust.
 
@@ -16,12 +14,16 @@ A minimal file downloader written in Rust.
 ## usage
 
 ```
-Adum 0.1.0
-Matt Gathu <dvgamerr@gmail.com>
+Adum 0.2.0
+Kananek T. <info.dvgamer@gmail.com>
+A minimal file downloader and upload
+
+Duma 0.1.0
+Matt Gathu <mattgathu@gmail.com>
 A minimal file downloader
 
 USAGE:
-    Adum [FLAGS] [OPTIONS] <URL>
+    adum [FLAGS] [OPTIONS] <URL>
 
 FLAGS:
     -c, --continue        resume getting a partially-downloaded file
