@@ -20,7 +20,7 @@ ftp = "3.0.1"
 threadpool = "1.8.1"
 failure = { version = "0.1.8", features = [] }
 url = "2.3.1"
-reqwest = {version = "0.11.12", features = ["blocking"]}
+reqwest = {version = "0.11.13", features = ["blocking"]}
 [dev-dependencies]
 assert_cmd = "2.0"
 tiny_http = "0.12.0"
