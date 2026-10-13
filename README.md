@@ -14,7 +14,7 @@ A minimal file downloader written in Rust.
 ## usage
 
 ```
-Adum 0.2.1
+Adum 0.2.0
 Kananek T. <info.dvgamer@gmail.com>
 A minimal file downloader and upload
 

@@ -47,18 +47,29 @@ pub fn decode_percent_encoded_data(data: &str) -> Fallible<String> {
     let mut index = 0;
     while index < bytes.len() {
         if bytes[index] == b'%' {
-            let encoded_byte = bytes
-                .get(index + 1..index + 3)
-                .ok_or_else(|| format_err!("incomplete percent encoding"))?;
-            let encoded_byte = std::str::from_utf8(encoded_byte)?;
-            unescaped_bytes.push(u8::from_str_radix(encoded_byte, 16)?);
+            let value = match bytes.get(index + 1..index + 3) {
+                Some([high, low]) if high.is_ascii_hexdigit() && low.is_ascii_hexdigit() => {
+                    (hex_value(*high) << 4) | hex_value(*low)
+                }
+                _ => bail!("invalid percent encoding at offset {} in {:?}", index, data),
+            };
+            unescaped_bytes.push(value);
             index += 3;
         } else {
             unescaped_bytes.push(bytes[index]);
             index += 1;
         }
     }
-    Ok(String::from_utf8(unescaped_bytes)?)
+    String::from_utf8(unescaped_bytes)
+        .map_err(|_| format_err!("percent-decoded data is not valid UTF-8: {:?}", data))
+}
+
+fn hex_value(byte: u8) -> u8 {
+    match byte {
+        b'0'..=b'9' => byte - b'0',
+        b'a'..=b'f' => byte - b'a' + 10,
+        _ => byte - b'A' + 10,
+    }
 }
 
 #[cfg(test)]
@@ -74,8 +85,21 @@ mod tests {
 
     #[test]
     fn test_decode_percent_encoded_data_rejects_invalid_encoding() {
-        for encoded in ["%", "%2", "%GG"] {
-            assert!(decode_percent_encoded_data(encoded).is_err());
+        for encoded in ["%", "%2", "%GG", "a%+fb", "%+1", "%-1", "%é", "%FF"] {
+            assert!(decode_percent_encoded_data(encoded).is_err(), "{}", encoded);
         }
+    }
+
+    #[test]
+    fn test_decode_percent_encoded_data_valid_edge_cases() {
+        assert_eq!(decode_percent_encoded_data("a%41").unwrap(), "aA");
+        assert_eq!(decode_percent_encoded_data("%e0%B8%81").unwrap(), "ก");
+        assert_eq!(decode_percent_encoded_data("").unwrap(), "");
+    }
+
+    #[test]
+    fn test_decode_percent_encoded_data_error_has_context() {
+        let err = decode_percent_encoded_data("ab%GG").unwrap_err().to_string();
+        assert!(err.contains("offset 2"), "{}", err);
     }
 }
