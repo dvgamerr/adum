@@ -1,4 +1,4 @@
-use failure::{bail, Fallible};
+use failure::{bail, format_err, Fallible};
 use std::fs::File;
 use std::fs::OpenOptions;
 use std::io;
@@ -43,17 +43,19 @@ pub fn get_file_handle(fname: &str, resume_download: bool, append: bool) -> io::
 
 pub fn decode_percent_encoded_data(data: &str) -> Fallible<String> {
     let mut unescaped_bytes: Vec<u8> = Vec::new();
-    let mut bytes = data.bytes();
-    while let Some(b) = bytes.next() {
-        match b as char {
-            '%' => {
-                let bytes_to_decode = &[bytes.next().unwrap(), bytes.next().unwrap()];
-                let hex_str = std::str::from_utf8(bytes_to_decode).unwrap();
-                unescaped_bytes.push(u8::from_str_radix(hex_str, 16).unwrap());
-            }
-            _ => {
-                unescaped_bytes.push(b);
-            }
+    let bytes = data.as_bytes();
+    let mut index = 0;
+    while index < bytes.len() {
+        if bytes[index] == b'%' {
+            let encoded_byte = bytes
+                .get(index + 1..index + 3)
+                .ok_or_else(|| format_err!("incomplete percent encoding"))?;
+            let encoded_byte = std::str::from_utf8(encoded_byte)?;
+            unescaped_bytes.push(u8::from_str_radix(encoded_byte, 16)?);
+            index += 3;
+        } else {
+            unescaped_bytes.push(bytes[index]);
+            index += 1;
         }
     }
     Ok(String::from_utf8(unescaped_bytes)?)
@@ -68,5 +70,12 @@ mod tests {
         let x = "hello%20world";
         let y = decode_percent_encoded_data(x).unwrap();
         assert_eq!(&y, "hello world");
+    }
+
+    #[test]
+    fn test_decode_percent_encoded_data_rejects_invalid_encoding() {
+        for encoded in ["%", "%2", "%GG"] {
+            assert!(decode_percent_encoded_data(encoded).is_err());
+        }
     }
 }
