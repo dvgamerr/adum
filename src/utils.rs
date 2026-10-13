@@ -99,7 +99,9 @@ mod tests {
 
     #[test]
     fn test_decode_percent_encoded_data_error_has_context() {
-        let err = decode_percent_encoded_data("ab%GG").unwrap_err().to_string();
+        let err = decode_percent_encoded_data("ab%GG")
+            .unwrap_err()
+            .to_string();
         assert!(err.contains("offset 2"), "{}", err);
     }
 }
